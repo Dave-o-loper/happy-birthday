@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday, Sara Jannat! 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #2c2c2c, #1a1a1a, #444);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      color: #fff;
+      text-shadow: 3px 3px 5px rgba(0,0,0,0.4);
+      min-height: 60px; /* reserve space for typewriter */
+    }
+
+    /* Typewriter effect */
+    .typing {
+      border-right: 2px solid #fff;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -120px;
+      width: 60px;
+      height: 80px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.9;
+      animation: float 6s infinite ease-in;
+    }
+    @keyframes float {
+      0%   { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    #musicBtn {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background: #fff;
+      color: #d12c2c;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 20;
+    }
+
+    /* Cake base styling */
+    .cake {
+      position: relative;
+      margin-top: 40px;
+      width: 200px;
+      height: 160px;
+    }
+
+    /* Bottom layer */
+    .layer-bottom {
+      position: absolute;
+      bottom: 0;
+      width: 200px;
+      height: 100px;
+      background: #3e2723;
+      border-radius: 0 0 20px 20px;
+      box-shadow: inset 0 -10px #2b1b15;
+    }
+    .layer-bottom::before {
+      content: "";
+      position: absolute;
+      top: -25px;
+      left: 0;
+      width: 100%;
+      height: 25px;
+      background: #fff;
+      border-radius: 15px 15px 0 0;
+    }
+
+    /* Top layer */
+    .layer-top {
+      position: absolute;
+      bottom: 100px;
+      left: 25px;
+      width: 150px;
+      height: 60px;
+      background: #3e2723;
+      border-radius: 15px 15px 10px 10px;
+      box-shadow: inset 0 -6px #2b1b15;
+    }
+    .layer-top::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: 0;
+      width: 100%;
+      height: 20px;
+      background: #fff;
+      border-radius: 15px 15px 0 0;
+    }
+
+    /* Cherries on top */
+    .cherries {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+    }
+    .cherry {
+      width: 18px;
+      height: 18px;
+      background: red;
+      border-radius: 50%;
+      box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Candles */
+.candle {
+  position: absolute;
+  bottom: 65px; /* sits nicely on top layer */
+  width: 10px;
+  height: 30px;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.candle.left {
+  left: 40px;
+}
+.candle.right {
+  right: 40px;
+}
+
+.flame {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 18px;
+  background: radial-gradient(circle at 50% 50%, #ffeb3b, #ff9800, transparent 70%);
+  border-radius: 50% 50% 50% 50%;
+  animation: flicker 0.15s infinite alternate;
+}
+
+@keyframes flicker {
+  from { transform: translateX(-50%) scale(1); opacity: 0.9; }
+  to   { transform: translateX(-50%) scale(1.1); opacity: 1; }
+}
+
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      .cake { width: 150px; height: 120px; }
+      .layer-bottom { width: 150px; height: 70px; }
+      .layer-top { width: 110px; height: 45px; left: 20px; bottom: 70px; }
+    }
+  </style>
+</head>
+<body>
+  <h1><span class="typing"></span></h1>
+<div class="cake">
+  <div class="layer-bottom"></div>
+  <div class="layer-top">
+    <!-- Candles beside cherries -->
+    <div class="candle left"><div class="flame"></div></div>
+    <div class="candle right"><div class="flame"></div></div>
+
+    <!-- Cherries -->
+    <div class="cherries">
+      <div class="cherry"></div>
+      <div class="cherry"></div>
+    </div>
+  </div>
+</div>
+
+
+  <button id="musicBtn">▶ Play Song</button>
+  <audio id="music" src="images/happy-birthday-254480.mp3"></audio>
+
+  <script>
+    // Typewriter effect
+const text = "🎉 Happy Birthday, Sara 🎂<br>🥳Have a blast🥳";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    // If the character is part of <br>, insert actual line break
+    if (text.slice(i, i + 4) === "<br>") {
+      document.querySelector(".typing").innerHTML += "<br>";
+      i += 4; // skip past <br>
+    } else {
+      document.querySelector(".typing").innerHTML += text.charAt(i);
+      i++;
+    }
+    setTimeout(typeWriter, 100);
+  }
+}
+typeWriter();
+
+
+    // Music play/pause toggle
+    const music = document.getElementById("music");
+    const btn = document.getElementById("musicBtn");
+    btn.onclick = () => {
+      if (music.paused) {
+        music.play();
+        btn.textContent = "⏸ Pause Song";
+      } else {
+        music.pause();
+        btn.textContent = "▶ Play Song";
+      }
+    };
+    music.addEventListener("ended", () => {
+      btn.textContent = "▶ Play Song";
+    });
+
+    // Balloons generator
+    function createBalloon() {
+      const b = document.createElement("div");
+      b.className = "balloon";
+      b.style.left = (Math.random() * 100) + "vw";
+      b.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      b.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.body.appendChild(b);
+      setTimeout(() => b.remove(), 7000);
+    }
+    setInterval(createBalloon, 500);
+  </script>
+</body>
+</html>
